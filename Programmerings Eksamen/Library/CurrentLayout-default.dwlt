@@ -46,7 +46,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 579, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 65
+  controlID: 39
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 303, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 110
+  controlID: 40
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 303, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 111
+  controlID: 113
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -396,9 +396,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 14f2ffff64f4ffff6cfbffff
+      m_SelectedIDs: c8340000
+      m_LastClickedID: 13512
+      m_ExpandedIDs: 6cfbffffd2340000ee340000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -628,21 +628,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_Scripts/Main/World
+    - Assets/_Scripts/Menu
   m_ViewMode: 1
   m_StartGridSize: 61
   m_LastFolders:
-  - Assets/_Scripts/Main/World
+  - Assets/_Scripts/Menu
   m_LastFoldersGridSize: 61
   m_LastProjectPath: C:\Users\Bruger\Desktop\Skole\3.G\Programering\Eksamen\ProgrammeringsEksamen\Programmerings
     Eksamen
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 5}
-    m_SelectedIDs: 1e380000
-    m_LastClickedID: 14366
-    m_ExpandedIDs: 000000009e350000d4350000d635000000ca9a3b
+    scrollPos: {x: 0, y: 21}
+    m_SelectedIDs: f6350000
+    m_LastClickedID: 13814
+    m_ExpandedIDs: 00000000b4350000ec350000ee35000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -670,7 +670,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009e350000
+    m_ExpandedIDs: 00000000b4350000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

@@ -7,7 +7,18 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
-    public void StartFreshGame(){
-        //SceneManagement.LoadScene("Main", LoadSceneMode.Additive);
+    public void StartFreshGame()
+    {
+        StartCoroutine(LoadMainAsync());
+    }
+
+    IEnumerator LoadMainAsync()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Main");
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 }
