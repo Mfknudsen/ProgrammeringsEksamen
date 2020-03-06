@@ -78,6 +78,11 @@
      <Compile Include="Assets\_Packages\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\_Packages\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\_Packages\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+     <Compile Include="Assets\_Scripts\Main\Player\AnimPlayer.cs" />
+     <Compile Include="Assets\_Scripts\Main\Player\LifePlayer.cs" />
+     <Compile Include="Assets\_Scripts\Main\Player\MovePlayer.cs" />
+     <Compile Include="Assets\_Scripts\Main\World\LoadWorld.cs" />
+     <Compile Include="Assets\_Scripts\Main\World\NewWorld.cs" />
      <Compile Include="Assets\_Scripts\Menu\Exit.cs" />
      <Compile Include="Assets\_Scripts\Menu\LoadGame.cs" />
      <Compile Include="Assets\_Scripts\Menu\Options.cs" />
