@@ -78,6 +78,10 @@
      <Compile Include="Assets\_Packages\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\_Packages\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\_Packages\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+     <Compile Include="Assets\_Scripts\Menu\Exit.cs" />
+     <Compile Include="Assets\_Scripts\Menu\LoadGame.cs" />
+     <Compile Include="Assets\_Scripts\Menu\Options.cs" />
+     <Compile Include="Assets\_Scripts\Menu\StartGame.cs" />
      <None Include="Assets\_Packages\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\_Packages\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\_Packages\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
