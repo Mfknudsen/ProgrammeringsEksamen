@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManager;
+//using UnityEngine.SceneManager;
 #endregion
 
 public class LoadGame : MonoBehaviour
@@ -12,7 +12,7 @@ public class LoadGame : MonoBehaviour
         //StartCoroutine(LoadOldAsync());
     }
 
-    IEnumerator LoadOldAsync()
+    /*IEnumerator LoadOldAsync()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Main");
 
@@ -20,5 +20,5 @@ public class LoadGame : MonoBehaviour
         {
             yield return null;
         }
-    }
+    }*/
 }
