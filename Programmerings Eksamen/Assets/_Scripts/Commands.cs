@@ -8,12 +8,7 @@ namespace AI_Commands
 {
     public class Commands : MonoBehaviour
     {
-        public void OpenWebsite(string Site)
-        {
-
-        }
-
-        public void OpenWebsiteWithBrowser(string Site, string Browser)
+        public void FindActionBasedOnText(string text)
         {
 
         }

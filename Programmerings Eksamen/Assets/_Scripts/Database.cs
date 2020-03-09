@@ -6,16 +6,23 @@ using UnityEngine;
 
 namespace AI_Database
 {
+    [System.Serializable]
     public class Database : MonoBehaviour
     {
-        public string GET_AI_Name()
-        {
-            return "";
-        }
+        #region Public Data
+        public string AI_Name;
 
-        public string GET_AI_Version() 
+        public string[] Continues_AI_Actions;
+        public string[] Continues_Async_AI_Actions;
+        #endregion
+
+        #region Private Data
+        Master Master;
+        #endregion
+
+        public Database(Database data)
         {
-            return "";     
+            AI_Name = data.AI_Name;
         }
     }
 }

@@ -401,6 +401,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a10b00ebb7b62454da84184800fdcfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AI_Name: 
+  Continues_AI_Actions: []
+  Continues_Async_AI_Actions: []
+--- !u!114 &2080874408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080874404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701ce78ff1b4b0c4c9c8cbf81e5072d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1809783022591664977
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,23 +8,28 @@ using UnityEngine;
 using AI_Commands;
 using AI_Database;
 using AI_External;
+using AI_VoiceReg;
 #endregion
 
 public class Master : MonoBehaviour
 {
     #region Public Data
+    [Header("Secondary Tool Scripts:")]
     Database DATA;
     Commands COM;
     ExternalAppController EAC;
+    UIManager UI;
+    VoiceRecognition VR;
     #endregion
 
     #region Private Data
     //AI resources:
     AudioSource AS;
+
       //Actions for the AI to atempt to complete. One at a time.
-    List<Dictionary<string, object>> AI_Actions = new List<Dictionary<string, object>>();
+    List<object> AI_Actions = new List<object>();
       //Actions for the AI to atempt to complete. All at one time.
-    List<Dictionary<string, object>> Async_AI_Actions = new List<Dictionary<string, object>>();
+    List<object> Async_AI_Actions = new List<object>();
 
     //AI information:
     string AIName;
@@ -33,7 +38,7 @@ public class Master : MonoBehaviour
     string UserName;
     #endregion
 
-    void Start()
+    private void Start()
     {
         AS = GetComponent<AudioSource>();
         if (AS == null)
@@ -68,21 +73,55 @@ public class Master : MonoBehaviour
                 EAC = gameObject.AddComponent<ExternalAppController>();
             }
         }
+        if (UI == null)
+        {
+            UI = GetComponent<UIManager>();
 
-        EAC.Launch();
+            if (UI == null)
+            {
+                UI = gameObject.AddComponent<UIManager>();
+            }
+        }
+        if (VR = null)
+        {
+            VR = GetComponent<VoiceRecognition>();
 
-        AIName = DATA.GET_AI_Name();
+            if (VR == null)
+            {
+                VR = gameObject.AddComponent<VoiceRecognition>();
+            }
+        }
 
-        Debug.Log(AIName);
+        VR.StartListening(this);
+
+        //SaveSystem.LoadDatabase();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         UpdateCurrentAction();
     }
 
-    private void UpdateCurrentAction(Object ActionInformation)
+    private void UpdateCurrentAction()
     {
+        object ObjectToRead = null;
 
+        foreach (object o in AI_Actions)
+        {
+            if (ObjectToRead == null) {
+                ObjectToRead = o;
+                break;
+            }
+        }
+    }
+
+    public void ReceiveNewSpeechText(string newSpeech)
+    {
+        COM.FindActionBasedOnText(newSpeech);
+    }
+
+    private void OnApplicationQuit()
+    {
+        //SaveSystem.SaveDatabase();
     }
 }
