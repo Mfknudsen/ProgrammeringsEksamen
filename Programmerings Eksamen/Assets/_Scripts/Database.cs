@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 #endregion
 
-namespace AI_Database
-{
+
     [System.Serializable]
     public class Database : MonoBehaviour
     {
@@ -25,4 +24,4 @@ namespace AI_Database
             AI_Name = data.AI_Name;
         }
     }
-}
+

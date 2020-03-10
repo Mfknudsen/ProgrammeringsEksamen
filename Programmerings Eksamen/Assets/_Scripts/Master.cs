@@ -4,22 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 #endregion
 
-#region Custom Functions:
-using AI_Commands;
-using AI_Database;
-using AI_External;
-using AI_VoiceReg;
-#endregion
-
 public class Master : MonoBehaviour
 {
     #region Public Data
     [Header("Secondary Tool Scripts:")]
-    Database DATA;
-    Commands COM;
-    ExternalAppController EAC;
-    UIManager UI;
-    VoiceRecognition VR;
+    public Database DATA;
+    public Commands COM;
+    public ExternalAppController EAC;
+    public UIManager UI;
+    public VoiceRecognition VR;
     #endregion
 
     #region Private Data
@@ -82,8 +75,9 @@ public class Master : MonoBehaviour
                 UI = gameObject.AddComponent<UIManager>();
             }
         }
-        if (VR = null)
+        if (VR == null)
         {
+            Debug.Log("VR is null");
             VR = GetComponent<VoiceRecognition>();
 
             if (VR == null)
@@ -92,7 +86,8 @@ public class Master : MonoBehaviour
             }
         }
 
-        VR.StartListening(this);
+        Debug.Log(VR);
+        VR.StartListening();
 
         //SaveSystem.LoadDatabase();
     }

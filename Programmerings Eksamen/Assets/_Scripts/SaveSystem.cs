@@ -4,10 +4,6 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 #endregion
 
-#region
-using AI_Database;
-#endregion
-
 public static class SaveSystem
 {
     public static void SaveData(Database d)

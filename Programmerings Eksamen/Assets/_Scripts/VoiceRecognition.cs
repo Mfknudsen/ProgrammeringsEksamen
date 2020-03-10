@@ -5,15 +5,13 @@ using UnityEngine;
 using UnityEngine.Windows.Speech;
 #endregion
 
-namespace AI_VoiceReg {
     public class VoiceRecognition : MonoBehaviour
     {
         private DictationRecognizer Recognizer;
         private Master Master;
 
-        public void StartListening(Master M)
+        public void StartListening()
         {
-            Master = M;
             Recognizer = new DictationRecognizer();
 
             Recognizer.DictationResult += (text, confindence) =>
@@ -48,4 +46,3 @@ namespace AI_VoiceReg {
             Master.ReceiveNewSpeechText(newText);
         }
     }
-}
