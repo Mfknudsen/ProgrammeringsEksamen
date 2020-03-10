@@ -10,35 +10,22 @@ namespace AI_VoiceReg {
     {
         private DictationRecognizer Recognizer;
         private Master Master;
- 
-        private void Update()
-        {
-            if (Recognizer != null)
-            {
-                Recognizer.DictationComplete += (completeCause) =>
-                {
-                    if (completeCause != DictationCompletionCause.Complete)
-                    {
-                        Debug.LogErrorFormat("Dictation completed unsuccessfully: {0}.", completeCause);
-                    }
-                };
-
-                Recognizer.DictationError += (error, result) =>
-                {
-                    Debug.LogErrorFormat("Dictation error: {0}; HResult = {1}.", error, result);
-                };
-
-                Recognizer.DictationResult += (text, confidence) =>
-                {
-                    ReturnTextFromSpeech(text);
-                };
-            }
-        }
 
         public void StartListening(Master M)
         {
             Master = M;
             Recognizer = new DictationRecognizer();
+
+            Recognizer.DictationResult += (text, confindence) =>
+            {
+                ReturnTextFromSpeech(text);
+                Debug.LogFormat("Dictation result: {0}" + text);
+            };
+
+            Recognizer.DictationHypothesis += (text) =>
+            {
+                Debug.LogFormat("Dictation hypothesis: {0}", text);
+            };
 
             Recognizer.DictationComplete += (completeCause) =>
             {
