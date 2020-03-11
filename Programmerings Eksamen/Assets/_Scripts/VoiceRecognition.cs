@@ -23,7 +23,7 @@ public class VoiceRecognition : MonoBehaviour
 
         Recognizer.DictationResult += (text, confindence) =>
         {
-            ReturnTextFromSpeech(text);
+            Master.ReceiveNewSpeechText(text);
             Debug.LogFormat("Dictation result: {0}" + text);
         };
 
@@ -46,10 +46,5 @@ public class VoiceRecognition : MonoBehaviour
         };
 
         Recognizer.Start();
-    }
-
-    public void ReturnTextFromSpeech(string newText)
-    {
-        Master.ReceiveNewSpeechText(newText);
     }
 }

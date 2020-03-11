@@ -96,9 +96,15 @@ public class Master : MonoBehaviour
 
         UI.AddToLog("Loading Data to Database!");
         Database LoadValues = SaveSystem.LoadDatabase();
-        DATA.LoadOldFromJson(LoadValues);
-        UI.AddToLog("Loading Complete!");
-
+        Debug.Log(LoadValues);
+        if (LoadValues != null) {
+            DATA.LoadOldFromJson(LoadValues);
+            UI.AddToLog("Loading Complete!");
+        }
+        else
+        {
+            UI.AddToLog("Loading Failed!");
+        }
         VR.StartListening();
 
         GetStartData();
@@ -175,6 +181,7 @@ public class Master : MonoBehaviour
     public void ReceiveNewSpeechText(string newSpeech)
     {
         COM.FindActionBasedOnText(newSpeech);
+        UI.ReplaceSpeechText(newSpeech);
     }
 
     private void OnApplicationQuit()

@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
 {
     #region Public Data
     public TextMeshProUGUI AI_Log;
+    public TextMeshProUGUI Speech_Log;
     #endregion
 
     private void Start()
@@ -23,5 +24,10 @@ public class UIManager : MonoBehaviour
         {
             AI_Log.text = Addition + "\n \n" + AI_Log.text;
         }
+    }
+
+    public void ReplaceSpeechText(string newText)
+    {
+        Speech_Log.text = newText;
     }
 }

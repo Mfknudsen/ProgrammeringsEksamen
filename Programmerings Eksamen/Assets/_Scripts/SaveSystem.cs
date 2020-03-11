@@ -12,10 +12,16 @@ public static class SaveSystem
 
         string path = Application.persistentDataPath + "/Information.DATA";
 
-        FileStream Stream = new FileStream(path, FileMode.Create);
+        if (File.Exists(path) == false) {
+            FileStream Stream = new FileStream(path, FileMode.Create);
 
-        Formatter.Serialize(Stream, DATA);
-        Stream.Close();
+            Formatter.Serialize(Stream, DATA);
+            Stream.Close();
+        }
+        else
+        {
+
+        }
     }
 
     public static Database LoadDatabase()

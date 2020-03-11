@@ -22,6 +22,7 @@ public class Database : MonoBehaviour
 
     public void Start()
     {
+        Debug.Log(Application.persistentDataPath);
         if (Master == null)
         {
             Master = GetComponent<Master>();
