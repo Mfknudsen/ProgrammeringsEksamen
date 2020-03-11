@@ -1,4 +1,9 @@
-﻿#region Systems:
+﻿/// Summary:
+/// This script will handle all object 
+/// or similar that is connected to UI 
+/// that the user can activly see.
+
+#region Systems:
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

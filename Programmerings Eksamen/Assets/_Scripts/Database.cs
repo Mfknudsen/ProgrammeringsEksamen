@@ -1,9 +1,12 @@
-﻿#region Systems:
+﻿/// Summary:
+/// This script will hold all data that the Master dont activly need 
+/// and that will be saved upon closing of the application.
+
+#region Systems:
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
-
 
 [System.Serializable]
 public class Database : MonoBehaviour

@@ -1,9 +1,15 @@
-﻿#region Systems
+﻿/// Summary:
+/// This script will handle the interpatations of the text made from 
+/// the speech and will try to find a matching command with an action 
+/// to perform and will then create that action.
+/// 
+/// The actions will be created as empty objects with only the script for the giving command and an Action script to control it. 
+
+#region Systems
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
-
 
 public class Commands : MonoBehaviour
 {
@@ -53,6 +59,8 @@ public class Commands : MonoBehaviour
         }
     }
 
+
+    #region Actions
     private void Command_OpenURL(string url)
     {
         GameObject newObject = Instantiate(ActionObject,Vector3.zero, Quaternion.identity, ObjectStorage);
@@ -64,5 +72,6 @@ public class Commands : MonoBehaviour
         Action Action = newObject.GetComponent<Action>();
         Action.Asyncronus = true;
     }
+    #endregion
 }
 

@@ -47,4 +47,9 @@ public class VoiceRecognition : MonoBehaviour
 
         Recognizer.Start();
     }
+
+    private void OnApplicationQuit()
+    {
+        Recognizer.Stop();
+    }
 }

@@ -1,4 +1,11 @@
-﻿#region Systems
+﻿/// Summary:
+/// This script will handle the saving and loading to 
+/// and from a local Json document.
+/// 
+/// The document will hold all files that are needed 
+/// to required when the AI starts up again.
+
+#region Systems
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;

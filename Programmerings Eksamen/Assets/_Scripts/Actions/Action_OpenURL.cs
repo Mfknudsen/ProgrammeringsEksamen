@@ -1,4 +1,8 @@
-﻿#region Systems
+﻿/// Summary:
+/// This script is a action the AI can take 
+/// when giving the command to open a website.
+
+#region Systems
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,12 +25,13 @@ public class Action_OpenURL : MonoBehaviour
     private void StartNow()
     {
         ActionHandler.IsStarted = true;
-        UnityWebRequest www = new UnityWebRequest(url);
-        StartCoroutine(WaitForrequest(www));
+        StartCoroutine(WaitForrequest());
     }
 
-    IEnumerator WaitForrequest(UnityWebRequest www)
+    IEnumerator WaitForrequest()
     {
+        UnityWebRequest www = new UnityWebRequest(url);
+
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)

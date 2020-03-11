@@ -1,4 +1,10 @@
-﻿#region Systems:
+﻿/// Summary:
+/// This script will be the main part of the AI and will hold and direct all other parts.
+/// It will tell the other scripts when to sertain actions and when it will receive input 
+/// or returns from the script that is meant for other scripts then it will pass it on to 
+/// right place.
+
+#region Systems:
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -97,7 +103,8 @@ public class Master : MonoBehaviour
         UI.AddToLog("Loading Data to Database!");
         Database LoadValues = SaveSystem.LoadDatabase();
         Debug.Log(LoadValues);
-        if (LoadValues != null) {
+        if (LoadValues != null)
+        {
             DATA.LoadOldFromJson(LoadValues);
             UI.AddToLog("Loading Complete!");
         }
@@ -124,7 +131,8 @@ public class Master : MonoBehaviour
 
     private void UpdateCurrentAction()
     {
-        if (AI_Actions.Count > 0) {
+        if (AI_Actions.Count > 0)
+        {
             Action ActionToRead = AI_Actions[0];
 
             if (ActionToRead.IsStarted == false)
@@ -184,6 +192,7 @@ public class Master : MonoBehaviour
         UI.ReplaceSpeechText(newSpeech);
     }
 
+    /*
     private void OnApplicationQuit()
     {
         UpdateCurrentAction();
@@ -203,4 +212,5 @@ public class Master : MonoBehaviour
         SaveSystem.SaveData(DATA);
         UI.AddToLog("Saving Complete");
     }
+    */
 }
