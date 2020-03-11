@@ -13,16 +13,18 @@ public class Master : MonoBehaviour
     public ExternalAppController EAC;
     public UIManager UI;
     public VoiceRecognition VR;
+    [Header("Communications Values:")]
+    public bool DatabaseIsLoaded = false;
     #endregion
 
     #region Private Data
     //AI resources:
     AudioSource AS;
 
-      //Actions for the AI to atempt to complete. One at a time.
-    List<object> AI_Actions = new List<object>();
-      //Actions for the AI to atempt to complete. All at one time.
-    List<object> Async_AI_Actions = new List<object>();
+    //Actions for the AI to atempt to complete. One at a time.
+    List<Action> AI_Actions = new List<Action>();
+    //Actions for the AI to atempt to complete. All at one time.
+    List<Action> Async_AI_Actions = new List<Action>();
 
     //AI information:
     string AIName;
@@ -31,8 +33,14 @@ public class Master : MonoBehaviour
     string UserName;
     #endregion
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
+
     private void Start()
     {
+        //Getting all the required components
         AS = GetComponent<AudioSource>();
         if (AS == null)
         {
@@ -61,7 +69,7 @@ public class Master : MonoBehaviour
         {
             EAC = GetComponent<ExternalAppController>();
 
-            if(EAC == null)
+            if (EAC == null)
             {
                 EAC = gameObject.AddComponent<ExternalAppController>();
             }
@@ -86,26 +94,80 @@ public class Master : MonoBehaviour
             }
         }
 
-        Debug.Log(VR);
+        UI.AddToLog("Loading Data to Database!");
+        Database LoadValues = SaveSystem.LoadDatabase();
+        DATA.LoadOldFromJson(LoadValues);
+        UI.AddToLog("Loading Complete!");
+
         VR.StartListening();
 
-        //SaveSystem.LoadDatabase();
+        GetStartData();
+        COM.AI_Name = AIName;
     }
 
     private void FixedUpdate()
     {
         UpdateCurrentAction();
+        UpdateAsyncActions();
+    }
+
+    private void GetStartData()
+    {
+        AIName = DATA.AI_Name;
     }
 
     private void UpdateCurrentAction()
     {
-        object ObjectToRead = null;
+        if (AI_Actions.Count > 0) {
+            Action ActionToRead = AI_Actions[0];
 
-        foreach (object o in AI_Actions)
+            if (ActionToRead.IsStarted == false)
+            {
+                ActionToRead.StartAction();
+            }
+            else if (ActionToRead.IsDone == false)
+            {
+                ActionToRead.UpdateAction();
+            }
+            else
+            {
+                AI_Actions.Remove(ActionToRead);
+            }
+
+            foreach (Action A in AI_Actions)
+            {
+                if (A.Contenius)
+                {
+                    DATA.Continues_AI_Actions.Add(A);
+                }
+            }
+        }
+    }
+
+    private void UpdateAsyncActions()
+    {
+        foreach (Action o in Async_AI_Actions)
         {
-            if (ObjectToRead == null) {
-                ObjectToRead = o;
-                break;
+            if (o.IsStarted == false)
+            {
+                o.StartAction();
+            }
+            else if (o.IsDone == false)
+            {
+                o.UpdateAction();
+            }
+            else
+            {
+                Async_AI_Actions.Remove(o);
+                o.DestroyObject();
+            }
+        }
+
+        foreach (Action A in Async_AI_Actions)
+        {
+            if (A.Contenius)
+            {
+                DATA.Continues_Async_AI_Actions.Add(A);
             }
         }
     }
@@ -117,6 +179,21 @@ public class Master : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        //SaveSystem.SaveDatabase();
+        UpdateCurrentAction();
+        UpdateAsyncActions();
+
+        foreach (Action A in DATA.Continues_AI_Actions)
+        {
+            A.IsStarted = false;
+        }
+
+        foreach (Action A in DATA.Continues_Async_AI_Actions)
+        {
+            A.IsStarted = false;
+        }
+
+        UI.AddToLog("Saving Database to Json file");
+        SaveSystem.SaveData(DATA);
+        UI.AddToLog("Saving Complete");
     }
 }

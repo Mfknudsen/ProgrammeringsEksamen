@@ -97,6 +97,7 @@
     <Compile Include="Assets\_Packages\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\_Packages\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\_Scripts\Action.cs" />
+    <Compile Include="Assets\_Scripts\Actions\Action_OpenURL.cs" />
     <Compile Include="Assets\_Scripts\Commands.cs" />
     <Compile Include="Assets\_Scripts\Database.cs" />
     <Compile Include="Assets\_Scripts\ExternalAppController.cs" />

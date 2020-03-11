@@ -6,15 +6,13 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
-    public static void SaveData(Database d)
+    public static void SaveData(Database DATA)
     {
         BinaryFormatter Formatter = new BinaryFormatter();
 
         string path = Application.persistentDataPath + "/Information.DATA";
 
         FileStream Stream = new FileStream(path, FileMode.Create);
-
-        Database DATA = new Database(d);
 
         Formatter.Serialize(Stream, DATA);
         Stream.Close();

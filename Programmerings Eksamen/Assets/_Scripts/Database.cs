@@ -5,23 +5,37 @@ using UnityEngine;
 #endregion
 
 
-    [System.Serializable]
-    public class Database : MonoBehaviour
+[System.Serializable]
+public class Database : MonoBehaviour
+{
+    #region Public Data
+    public string AI_Name;
+    [HideInInspector]
+    public List<Action> Continues_AI_Actions = new List<Action>();
+    [HideInInspector]
+    public List<Action> Continues_Async_AI_Actions = new List<Action>();
+    #endregion
+
+    #region Private Data
+    Master Master;
+    #endregion
+
+    public void Start()
     {
-        #region Public Data
-        public string AI_Name;
-
-        public string[] Continues_AI_Actions;
-        public string[] Continues_Async_AI_Actions;
-        #endregion
-
-        #region Private Data
-        Master Master;
-        #endregion
-
-        public Database(Database data)
+        if (Master == null)
         {
-            AI_Name = data.AI_Name;
+            Master = GetComponent<Master>();
         }
     }
+
+    public void LoadOldFromJson(Database data)
+    {
+        AI_Name = data.AI_Name;
+
+        Continues_AI_Actions = data.Continues_AI_Actions;
+        Continues_Async_AI_Actions = data.Continues_Async_AI_Actions;
+
+        Master.DatabaseIsLoaded = true;
+    }
+}
 
