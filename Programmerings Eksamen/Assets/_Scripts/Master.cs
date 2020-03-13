@@ -21,16 +21,18 @@ public class Master : MonoBehaviour
     public VoiceRecognition VR;
     [Header("Communications Values:")]
     public bool DatabaseIsLoaded = false;
+
+    //Actions for the AI to atempt to complete. One at a time.
+    [HideInInspector]
+    public List<Action> AI_Actions = new List<Action>();
+    //Actions for the AI to atempt to complete. All at one time.
+    [HideInInspector]
+    public List<Action> Async_AI_Actions = new List<Action>();
     #endregion
 
     #region Private Data
     //AI resources:
     AudioSource AS;
-
-    //Actions for the AI to atempt to complete. One at a time.
-    List<Action> AI_Actions = new List<Action>();
-    //Actions for the AI to atempt to complete. All at one time.
-    List<Action> Async_AI_Actions = new List<Action>();
 
     //AI information:
     string AIName;
@@ -100,22 +102,24 @@ public class Master : MonoBehaviour
             }
         }
 
-        UI.AddToLog("Loading Data to Database!");
-        Database LoadValues = SaveSystem.LoadDatabase();
-        Debug.Log(LoadValues);
-        if (LoadValues != null)
-        {
-            DATA.LoadOldFromJson(LoadValues);
-            UI.AddToLog("Loading Complete!");
-        }
-        else
-        {
-            UI.AddToLog("Loading Failed!");
-        }
+        /* UI.AddToLog("Loading Data to Database!");
+         Database LoadValues = SaveSystem.LoadDatabase();
+
+         if (LoadValues != null)
+         {
+             DATA.LoadOldFromJson(LoadValues);
+             UI.AddToLog("Loading Complete!");
+         }
+         else
+         {
+             UI.AddToLog("Loading Failed!");
+         }
+         */
+
         VR.StartListening();
 
-        GetStartData();
-        COM.AI_Name = AIName;
+        //GetStartData();
+        //COM.AI_Name = AIName;
     }
 
     private void FixedUpdate()
@@ -176,20 +180,76 @@ public class Master : MonoBehaviour
                 o.DestroyObject();
             }
         }
-
-        foreach (Action A in Async_AI_Actions)
-        {
-            if (A.Contenius)
-            {
-                DATA.Continues_Async_AI_Actions.Add(A);
-            }
-        }
     }
 
     public void ReceiveNewSpeechText(string newSpeech)
     {
-        COM.FindActionBasedOnText(newSpeech);
-        UI.ReplaceSpeechText(newSpeech);
+        string[] Wish = newSpeech.Split(' ');
+        List<string> Command = new List<string>();
+        List<string> checkedCommand = new List<string>();
+
+        for (int i = 0; i < Wish.Length; i++)
+        {
+            string W = Wish[i];
+
+            if (W == "mute")
+            {
+                if (Wish[i - 1] == "on")
+                {
+                    checkedCommand[i - 1] = "unmute";
+                }
+                else
+                {
+                    checkedCommand.Add(W);
+                }
+            }
+            else
+            {
+                checkedCommand.Add(W);
+            }
+        }
+
+        for (int i = 0; i < checkedCommand.Count; i++)
+        {
+            string Word = checkedCommand[i];
+            if (Command.Count > 0)
+            {
+                Command.Add(Word);
+            }
+            else
+            {
+                if (Word == "computer")
+                {
+                    Command.Add(Word);
+                }
+            }
+        }
+
+        string textToShow = "";
+        foreach (string W in checkedCommand)
+        {
+            textToShow += W + " ";
+        }
+
+        UI.ReplaceSpeechText(textToShow);
+        COM.FindActionBasedOnText(Command);
+    }
+
+    public void ReceiveNewLog(string newLog)
+    {
+        UI.AddToLog(newLog);
+    }
+
+    public void ReceiveNewAction(Action A)
+    {
+        if (A.Asyncronus)
+        {
+            Async_AI_Actions.Add(A);
+        }
+        else
+        {
+            AI_Actions.Add(A);
+        }
     }
 
     /*

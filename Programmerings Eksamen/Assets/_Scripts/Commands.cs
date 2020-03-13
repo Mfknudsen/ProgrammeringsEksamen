@@ -14,48 +14,87 @@ using UnityEngine;
 public class Commands : MonoBehaviour
 {
     #region Public Data
-    public string AI_Name;
+    public string AI_Name = "computer";
     public GameObject ActionObject;
     public Transform ObjectStorage;
     #endregion
 
-    public void FindActionBasedOnText(string text)
+    #region Private Data
+    Master Master;
+    private bool IsMuted = false;
+    #endregion
+
+    private void Start()
     {
-        char[] SeperateBy = { ' ', '/', '_' };
-        string[] Wish = text.Split(SeperateBy);
-        List<string> Command = new List<string>();
+        if (Master == null)
+            Master = GetComponent<Master>();
+    }
 
-        foreach (string W in Wish)
-        {
-            string Word = W;
-
-            if (Word == AI_Name || Command[0] == AI_Name)
-            {
-                Command.Add(Word);
-            } 
-        }
+    public void FindActionBasedOnText(List<string> text)
+    {
+        WasCommandFound = false;
+        List<string> Command = text;
 
         if (Command.Count > 0)
         {
-            string GivingCommand = "";
-            foreach (string W in Command)
+            if (Command[0] == AI_Name)
             {
-                GivingCommand = GivingCommand + "" + W;
-            }
-            Debug.Log(GivingCommand);
-
-            if (Command[1].ToLower() == "open")
-            {
-                if (Command[1].ToLower() == "youtube")
+                if (Command.Count > 1)
                 {
-                    Command_OpenURL("Youtube.com");
-                    Debug.Log("Opening YouTube.com in standard browser.");
+                    if (Command[1] == "open" && !IsMuted)
+                    {
+                        if (Command.Count > 2)
+                        {
+                            if (Command[2] == "youtube")
+                            {
+                                Master.ReceiveNewLog("Opening Youtube.");
+                                WasCommandFound = true;
+                                Command_OpenURL("https://www.youtube.com/");
+                            }
+                            else if (Command[2] == "facebook")
+                            {
+                                if (Command.Count > 3)
+                                {
+                                    if (Command[3] == "groups")
+                                    {
+                                        Master.ReceiveNewLog("Opening Facebook Groups.");
+                                        WasCommandFound = true;
+                                        Command_OpenURL("https://www.facebook.com/groups/");
+                                    }
+                                    else
+                                    {
+                                        Master.ReceiveNewLog("Opening Facebook.");
+                                        WasCommandFound = true;
+                                        Command_OpenURL("https://www.facebook.com/");
+                                    }
+                                }
+                                else
+                                {
+                                    Master.ReceiveNewLog("Opening Facebook.");
+                                    WasCommandFound = true;
+                                    Command_OpenURL("https://www.facebook.com/");
+                                }
+                            }
+                            else if (Command[2] == "messenger")
+                            {
+                                Master.ReceiveNewLog("Opening Messenger.");
+                                WasCommandFound = true;
+                                Command_OpenURL("https://www.facebook.com/messages");
+                            }
+                        }
+                    }
+                    else if (Command[1] == "mute" && !IsMuted)
+                    {
+                        IsMuted = true;
+                        Master.ReceiveNewLog("Muted has been activated. \nThe computer will only react to the command unmute.");
+                    }
+                    else if (Command[1] == "unmute" && IsMuted)
+                    {
+                        IsMuted = false;
+                        Master.ReceiveNewLog("Muted has been deactivated. \nThe computer will now react to all commands.");
+                    }
                 }
             }
-        }
-        else
-        {
-            Debug.Log("There was no command giving it the last recording");
         }
     }
 
@@ -63,7 +102,7 @@ public class Commands : MonoBehaviour
     #region Actions
     private void Command_OpenURL(string url)
     {
-        GameObject newObject = Instantiate(ActionObject,Vector3.zero, Quaternion.identity, ObjectStorage);
+        GameObject newObject = Instantiate(ActionObject, Vector3.zero, Quaternion.identity, ObjectStorage);
 
         newObject.AddComponent<Action_OpenURL>();
         Action_OpenURL sAction = newObject.GetComponent<Action_OpenURL>();
@@ -71,6 +110,7 @@ public class Commands : MonoBehaviour
 
         Action Action = newObject.GetComponent<Action>();
         Action.Asyncronus = true;
+        Master.ReceiveNewAction(Action);
     }
     #endregion
 }

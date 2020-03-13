@@ -15,24 +15,26 @@ public class UIManager : MonoBehaviour
 {
     #region Public Data
     public TextMeshProUGUI AI_Log;
-    public TextMeshProUGUI Speech_Log;
+    public TextMeshProUGUI SpeechLog;
     #endregion
 
     private void Start()
     {
-        AI_Log.text = "Local Json datapath: \n"+ Application.persistentDataPath;
+        AI_Log.text = "Local Json datapath: \n" + Application.persistentDataPath;
+        SpeechLog.text = "Ready for Speech!";
     }
 
     public void AddToLog(string Addition)
     {
-        if (Addition != null)
-        {
-            AI_Log.text = Addition + "\n \n" + AI_Log.text;
-        }
+        AI_Log.text = Addition + "\n \n" + AI_Log.text;
     }
 
     public void ReplaceSpeechText(string newText)
     {
-        Speech_Log.text = newText;
+        if (newText.Length > 0)
+        {
+            string First = char.ToUpper(newText[0]) + newText.Substring(1);
+            SpeechLog.text = First;
+        }
     }
 }

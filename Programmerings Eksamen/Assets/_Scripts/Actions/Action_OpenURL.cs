@@ -28,8 +28,13 @@ public class Action_OpenURL : MonoBehaviour
         StartCoroutine(WaitForrequest());
     }
 
+    private void UpdateNow()
+    {
+    }
+
     IEnumerator WaitForrequest()
     {
+        Application.OpenURL(url);
         UnityWebRequest www = new UnityWebRequest(url);
 
         yield return www.SendWebRequest();
