@@ -5,14 +5,14 @@ All Commands Are In English.
 
 Standart Commands:
   
-computer hide AI log.
+computer hide AI log
 
-computer show AI log.
+computer show AI log
 
-computer mute.
+computer mute
 
-computer unmute.
+computer unmute
 
-computer switch to main screen.
+computer switch to main screen
 
-computer switch to command list.
+computer switch to command list
