@@ -18,7 +18,7 @@ public class Database : MonoBehaviour
     [HideInInspector]
     public List<Action> Continues_Async_AI_Actions = new List<Action>();
     [HideInInspector]
-    public List<Dictionary<string, string[]>> CommandList;
+    public List<Dictionary<string, string[]>> CommandList = new List<Dictionary<string, string[]>>();
     #endregion
 
     #region Private Data
